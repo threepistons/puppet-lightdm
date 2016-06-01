@@ -44,7 +44,7 @@ class lightdm::install (
       path        => ['/usr/sbin', '/usr/bin', '/sbin', '/bin'],
       user        => 'root',
       refreshonly => true,
-      notify      => Service['display-manager'],
+      notify      => Class['lightdm::service'],
       require     => [Exec['set shared/default-x-display-manager'], File['default-display-manager']]
     }
 
