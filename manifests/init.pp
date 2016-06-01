@@ -17,6 +17,9 @@
 # * `make_default`
 # Should lightdm be made the default display-manager?
 #
+# * `service_manage`
+# Should we restart lightdm service on config file changes?
+#
 # Examples
 # --------
 #
@@ -55,6 +58,7 @@ class lightdm (
   $package_name      = $lightdm::params::package_name,
   $package_provider  = $lightdm::params::package_provider,
   $service_ensure    = $lightdm::params::service_ensure,
+  $service_manage    = $lightdm::params::service_manage,
   $service_name      = $lightdm::params::service_name,
   $service_provider  = $lightdm::params::service_provider,
 
@@ -69,6 +73,7 @@ class lightdm (
   validate_string($package_name)
   validate_string($package_provider)
   validate_string($service_ensure)
+  validate_bool($service_manage)
   validate_string($service_name)
   validate_string($service_provider)
 

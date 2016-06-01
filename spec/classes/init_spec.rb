@@ -181,6 +181,26 @@ describe 'lightdm' do
         )}
       end
     end
+
+    context "on #{distro}" do
+      let(:facts) {{
+        :osfamily => distro,
+        :lsbdistid => distro,
+        :lsbdistcodename => 'jessie',
+      }}
+
+      let(:params) {{
+        :service_manage => false,
+      }}
+
+      it { should contain_class('lightdm::install') }
+      it { should contain_class('lightdm::config') }
+      it { should contain_class('lightdm::service') }
+
+      describe 'will not contain display-manager service' do
+        it { should_not contain_service('display-manager') }
+      end
+    end
   end
 
 end

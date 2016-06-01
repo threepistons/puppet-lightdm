@@ -61,6 +61,10 @@ Hash of configuration sections and keys/values to apply to users.conf
 Boolean. If true the module will set lightdm as the default X11 display-manager
 and update the systemd display-manager.service symlink to point to lightdm.
 
+####`service_manage`
+
+Boolean. If true the module will restart lightdm after config changes.
+
 ## Limitations
 
 This module has been built on and tested against Puppet 3.x.

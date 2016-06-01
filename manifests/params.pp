@@ -31,8 +31,9 @@ class lightdm::params {
     }
   }
 
-  $config       = {}
-  $config_users = {}
-  $make_default = true
+  $config         = {}
+  $config_users   = {}
+  $make_default   = true
+  $service_manage = true
 
 }
