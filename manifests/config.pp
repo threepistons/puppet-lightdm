@@ -14,7 +14,7 @@ class lightdm::config (
       group   => 'root',
       mode    => '0644',
       content => template("${module_name}/lightdm.conf.erb"),
-      notify  => Service['display-manager']
+      notify  => Class['lightdm::service']
     }
   }
 
@@ -26,7 +26,7 @@ class lightdm::config (
       group => 'root',
       mode => '0644',
       content => template("${module_name}/users.conf.erb"),
-      notify  => Service['display-manager']
+      notify  => Class['lightdm::service']
     }
   }
 

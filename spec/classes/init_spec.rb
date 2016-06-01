@@ -112,7 +112,7 @@ describe 'lightdm' do
         it { should contain_file('lightdm.conf').with(
           'ensure' => 'file',
           'path'   => '/etc/lightdm/lightdm.conf',
-          'notify' => 'Service[display-manager]'
+          'notify' => 'Class[Lightdm::Service]'
         )}
         it 'should set supplied options' do
           should contain_file('lightdm.conf') \
@@ -125,7 +125,7 @@ describe 'lightdm' do
         it { should contain_file('users.conf').with(
           'ensure' => 'file',
           'path'   => '/etc/lightdm/users.conf',
-          'notify' => 'Service[display-manager]'
+          'notify' => 'Class[Lightdm::Service]'
         )}
         it 'should configure supplied options' do
           should contain_file('users.conf') \
