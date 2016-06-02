@@ -38,6 +38,10 @@ describe 'lightdm' do
         it { should_not contain_file('users.conf') }
       end
 
+      describe 'not install greeter' do
+        it { should_not contain_package('lightdm-greeter') }
+      end
+
       describe 'generate default-display-manager' do
         it { should contain_file('default-display-manager').with(
           'ensure' => 'file',
@@ -94,7 +98,8 @@ describe 'lightdm' do
             'hidden-users' => 'nobody nobody4 noaccess',
             'hidden-shells' => '/bin/false /usr/sbin/nologin',
           }
-        }
+        },
+        :greeter => 'lightdm-gtk-greeter'
       }}
 
       it { should contain_class('lightdm::install') }
@@ -108,6 +113,13 @@ describe 'lightdm' do
         )}
       end
 
+      describe 'greeter installation' do
+        it { should contain_package('lightdm-greeter').with(
+          'ensure' => 'installed',
+          'name'   => 'lightdm-gtk-greeter'
+        )}
+      end
+
       describe 'configure lightdm.conf' do
         it { should contain_file('lightdm.conf').with(
           'ensure' => 'file',
@@ -118,6 +130,7 @@ describe 'lightdm' do
           should contain_file('lightdm.conf') \
             .with_content(/\[Seat:\*\]/) \
             .with_content(/autologin-user=ubuntu/)
+            .with_content(/greeter-session=lightdm-gtk-greeter/)
         end
       end
 
@@ -137,7 +150,7 @@ describe 'lightdm' do
       end
     end
 
-    context "on #{distro}" do
+    context "on #{distro} without setting default display-manager" do
       let(:facts) {{
         :osfamily => distro,
         :lsbdistid => distro,
@@ -182,7 +195,7 @@ describe 'lightdm' do
       end
     end
 
-    context "on #{distro}" do
+    context "on #{distro} without managing service" do
       let(:facts) {{
         :osfamily => distro,
         :lsbdistid => distro,

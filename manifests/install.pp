@@ -1,5 +1,6 @@
 # Class lightdm::install
 class lightdm::install (
+  $greeter          = $lightdm::greeter,
   $make_default     = $lightdm::make_default,
   $package_ensure   = $lightdm::package_ensure,
   $package_name     = $lightdm::package_name,
@@ -65,5 +66,15 @@ class lightdm::install (
     }
 
   }
+
+  # Install greeter
+  if $greeter {
+    package {'lightdm-greeter':
+      name     => $greeter,
+      ensure   => $package_ensure,
+      provider => $package_provider
+    }
+  }
+
 
 }

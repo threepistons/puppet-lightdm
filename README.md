@@ -56,6 +56,10 @@ Hash of configuration sections and keys/values to apply to lightdm.conf
 
 Hash of configuration sections and keys/values to apply to users.conf
 
+####`greeter`
+
+Which greeter to install and configure as the default.
+
 ####`make_default`
 
 Boolean. If true the module will set lightdm as the default X11 display-manager

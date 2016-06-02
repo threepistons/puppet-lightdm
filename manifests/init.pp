@@ -14,6 +14,9 @@
 # Hash of config to apply in /etc/lightdm/users.conf
 # See below for example.
 #
+# * `greeter`
+# Which greeter to install and configure as the default.
+#
 # * `make_default`
 # Should lightdm be made the default display-manager?
 #
@@ -53,6 +56,7 @@ class lightdm (
   $config_users_file = $lightdm::params::config_users_file,
   $config            = $lightdm::params::config,
   $config_users      = $lightdm::params::config_users,
+  $greeter           = $lightdm::params::greeter,
   $make_default      = $lightdm::params::make_default,
   $package_ensure    = $lightdm::params::package_ensure,
   $package_name      = $lightdm::params::package_name,
@@ -68,6 +72,7 @@ class lightdm (
   validate_absolute_path($config_users_file)
   validate_hash($config)
   validate_hash($config_users)
+  validate_string($greeter)
   validate_bool($make_default)
   validate_string($package_ensure)
   validate_string($package_name)
@@ -76,6 +81,18 @@ class lightdm (
   validate_bool($service_manage)
   validate_string($service_name)
   validate_string($service_provider)
+
+  # Merge greeter choice into main config
+  if $greeter {
+    $greeter_config = {
+      'Seat:*'        => {
+        'greeter-session' => $greeter
+      }
+    }
+    $_config = deep_merge($greeter_config, $config)
+  } else {
+    $_config = $config
+  }
 
   include '::lightdm::install'
   include '::lightdm::config'

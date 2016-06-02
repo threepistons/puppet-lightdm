@@ -33,6 +33,7 @@ class lightdm::params {
 
   $config         = {}
   $config_users   = {}
+  $greeter        = undef
   $make_default   = true
   $service_manage = true
 

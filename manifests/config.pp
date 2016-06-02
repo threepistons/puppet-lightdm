@@ -1,6 +1,6 @@
 # Class lightdm::config
 class lightdm::config (
-  $config            = $lightdm::config,
+  $config            = $lightdm::_config,
   $config_file       = $lightdm::config_file,
   $config_users_file = $lightdm::config_users_file,
   $config_users      = $lightdm::config_users,
