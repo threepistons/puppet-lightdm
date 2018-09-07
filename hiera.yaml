@@ -5,6 +5,8 @@ hierarchy:
     path: "distro/%{::facts.lsbdistid}/%{::facts.lsbdistrelease}.yaml"
   - name: distro
     path: "distro/%{::facts.lsbdistid}.yaml"
+  - name: osfamily
+    path: "osfamily/%{::facts.osfamily}.yaml"
   - name: common
     path: common.yaml
 defaults:

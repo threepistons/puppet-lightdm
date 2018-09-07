@@ -52,21 +52,23 @@
 # Copyright 2016 Brad Cowie, unless otherwise noted.
 #
 class lightdm (
-  $config_file       = $lightdm::params::config_file,
-  $config_users_file = $lightdm::params::config_users_file,
-  $config            = $lightdm::params::config,
-  $config_users      = $lightdm::params::config_users,
-  $greeter           = $lightdm::params::greeter,
-  $make_default      = $lightdm::params::make_default,
-  $package_ensure    = $lightdm::params::package_ensure,
-  $package_name      = $lightdm::params::package_name,
-  $package_provider  = $lightdm::params::package_provider,
-  $service_ensure    = $lightdm::params::service_ensure,
-  $service_manage    = $lightdm::params::service_manage,
-  $service_name      = $lightdm::params::service_name,
-  $service_provider  = $lightdm::params::service_provider,
 
-) inherits lightdm::params {
+  $config_file,
+  $config_users_file,
+  $config_greeter_file,
+  $config,
+  $config_users,
+  $greeter,
+  $make_default,
+  $package_ensure,
+  $package_name,
+  $package_provider,
+  $service_ensure,
+  $service_manage,
+  $service_name,
+  $service_provider
+
+) {
 
   validate_absolute_path($config_file)
   validate_absolute_path($config_users_file)
