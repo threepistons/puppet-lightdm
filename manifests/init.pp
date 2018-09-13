@@ -52,37 +52,31 @@
 # Copyright 2016 Brad Cowie, unless otherwise noted.
 #
 class lightdm (
-
-  $config_file,
-  $config_users_file,
-  $config_greeter_file,
-  $config,
-  $config_users,
-  $greeter,
-  $make_default,
-  $package_ensure,
-  $package_name,
-  $package_provider,
-  $service_ensure,
-  $service_manage,
-  $service_name,
-  $service_provider
+  Boolean $ddir,
+  String $config_file,
+  String $config_users_file,
+  String $config_greeter_file,
+  String $config_dir,
+  String $config_users_dir,
+  String $config_greeter_dir,
+  Hash $config,
+  Hash $config_users,
+  Hash $config_greeter,
+  String $greeter,
+  Boolean $make_default,
+  String $package_ensure,
+  String $package_name,
+  String $service_ensure,
+  Boolean $service_manage,
+  String $service_name,
 
 ) {
-
   validate_absolute_path($config_file)
   validate_absolute_path($config_users_file)
-  validate_hash($config)
-  validate_hash($config_users)
-  validate_string($greeter)
-  validate_bool($make_default)
-  validate_string($package_ensure)
-  validate_string($package_name)
-  validate_string($package_provider)
-  validate_string($service_ensure)
-  validate_bool($service_manage)
-  validate_string($service_name)
-  validate_string($service_provider)
+  validate_absolute_path($config_greeter_file)
+  validate_absolute_path($config_dir)
+  validate_absolute_path($config_users_dir)
+  validate_absolute_path($config_greeter_dir)
 
   # Merge greeter choice into main config
   if $greeter {

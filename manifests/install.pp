@@ -4,7 +4,6 @@ class lightdm::install (
   $make_default     = $lightdm::make_default,
   $package_ensure   = $lightdm::package_ensure,
   $package_name     = $lightdm::package_name,
-  $package_provider = $lightdm::package_provider,
 ) {
 
   if $make_default {
@@ -50,19 +49,17 @@ class lightdm::install (
     }
 
     package { 'lightdm':
-      name     => $package_name,
-      ensure   => $package_ensure,
-      provider => $package_provider,
-      before   => File['default-display-manager'],
-      notify   => Exec['set shared/default-x-display-manager']
+      ensure => $package_ensure,
+      name   => $package_name,
+      before => File['default-display-manager'],
+      notify => Exec['set shared/default-x-display-manager']
     }
 
   } else {
 
     package { 'lightdm':
-      name     => $package_name,
-      ensure   => $package_ensure,
-      provider => $package_provider,
+      ensure => $package_ensure,
+      name   => $package_name,
     }
 
   }
@@ -70,9 +67,8 @@ class lightdm::install (
   # Install greeter
   if $greeter {
     package {'lightdm-greeter':
-      name     => $greeter,
-      ensure   => $package_ensure,
-      provider => $package_provider
+      ensure => $package_ensure,
+      name   => $greeter,
     }
   }
 

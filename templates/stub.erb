@@ -1,0 +1,14 @@
+<%= ERB.new(File.read(File.expand_path("_header.erb",File.dirname(file)))).result(binding) -%>
+
+<% stub.sort.each do |key, values| -%>
+<% [values].flatten.sort.each do |value| -%>
+<%= !value ? '#' : '' %><%= key -%><%=
+         case value
+         when true, false
+           ''
+         else
+           "=#{value}"
+         end
+%>
+<% end -%>
+<% end -%>

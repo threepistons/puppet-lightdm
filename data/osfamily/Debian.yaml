@@ -1,13 +1,45 @@
 ---
 
+lightdm::issupported: true
+
 lightdm::greeter: gtk
+lightdm::ddir: true
 lightdm::config_path: /etc/lightdm
 lightdm::config_file: "%{lightdm::config_path}/lightdm.conf"
 lightdm::config_users_file: "%{lightdm::config_path}/users.conf"
 lightdm::config_greeter_file: "%{lightdm::config_path}/lightdm-%{lightdm::greeter}-greeter.conf"
+lightdm::config_dir: "${lightdm::config_file}.d"
+lightdm::config_users_dir: "${lightdm::config_users_file}.d"
+lightdm::config_greeter_dir: "${lightdm::config_greeter_file}.d"
 lightdm::package_ensure: installed
 lightdm::service_ensure: running
 lightdm::package_name: lightdm
 lightdm::service_name: display-manager
 lightdm::make_default: true
 lightdm::service_manage: true
+
+lightdm::config:
+  50_no-guest.conf:
+    'Seat:*':
+      allow-guest: false
+      user-session: ubuntu-session
+      greeter-show-manual-login: true
+      greeter-hide-users: true
+
+lightdm::config_greeter:
+  99_ubuntu-mate.conf:
+    greeter:
+      background: /usr/share/backgrounds/warty-final-ubuntu.png
+      theme-name: Adawaita
+      xft-antialias: true
+      xft-hintstyle: hintfull
+      xft-rgba: rgb
+      show-clock: true
+      clock-format: '%H:%M'
+
+lightdm::config_users:
+  UserList:
+    minimum-uid: 500
+    hidden-users: 'nobody nobody4 noaccess'
+    hidden-shells: '/bin/false /usr/sbin/nologin'
+
